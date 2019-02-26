@@ -56,7 +56,7 @@ mainGame.titleScene.create = function(pGame) {
     var titleImg = mgCommon.createLabel('スライム集め', 'center', 10, 120, '#ffffff', '28px Yu Gothic');
     var subTitleImg = mgCommon.createLabel('- スライムを集めるゲーム -', 'center', 10, 160, '#ffffff', '14px Yu Gothic');
     var startImg = mgCommon.createSprite(236, 48, pGame.assets['./img/start.png'], 42, 200);
-    var touchStartMesImg = mgCommon.createLabel('↑タッチしてね↑', 'center', 10, 260, '#ffffff', '14px Yu Gothic');
+    var touchStartMesImg = mgCommon.createLabel('↑タッチしてください↑', 'center', 10, 260, '#ffffff', '14px Yu Gothic');
     var licenseMesImg = mgCommon.createLabel('キャラクター素材制作：王国興亡記', 'center', 10, 360, '#ffffff', '10px Yu Gothic');
 
     scene.addChild(titleImg);
@@ -116,7 +116,7 @@ mainGame.gameScene.create =  function(pGame) {
 
     // キーパッド
     var pad = new Pad();
-    pad.x = mgCommon.SCREEN_WIDTH / 2 - 50;
+    pad.x = 0;
     pad.y = mgCommon.SCREEN_HEIGTH / 2 + 100;
     scene.addChild(pad);
 
@@ -216,15 +216,20 @@ mainGame.clearScene.create = function(pGame, pResultScore) {
     var scene = new Scene();
     scene.backgroundColor = '#303030';
 
-    var clearImg = mgCommon.createSprite(267, 48, pGame.assets['./img/clear.png'], 20, 160);
-    var scoreImg = mgCommon.createLabel(pResultScore + 'Point', 'center', 0, 100, '#ffffff', '40px Yu Gothic');
-    var retryImg = mgCommon.createLabel('もう一度挑戦する', 'center', 20, 250, '#ffffff', '20px Yu Gothic');
+    var clearImg = mgCommon.createSprite(267, 48, pGame.assets['./img/clear.png'], 25, 180);
+    var scoreImg = mgCommon.createLabel(pResultScore + 'Point', 'center', 10, 100, '#ffffff', '40px Yu Gothic');
+    var retryImg = mgCommon.createLabel('↑もう一度挑戦する↑', 'center', 10, 250, '#ffffff', '20px Yu Gothic');
 
     scene.addChild(clearImg);
     scene.addChild(scoreImg);
     scene.addChild(retryImg);
 
-    retryImg.addEventListener(Event.TOUCH_START, function(e) {
+    pGame.input.left    = 0;
+    pGame.input.right   = 0;
+    pGame.input.up      = 0;
+    pGame.input.down    = 0;
+
+    clearImg.addEventListener(Event.TOUCH_START, function(e) {
         pGame.replaceScene(mgTitleScene.create(pGame));
     });
 
